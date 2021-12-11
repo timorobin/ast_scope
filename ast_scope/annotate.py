@@ -1,8 +1,9 @@
+import networkx as nx
 
 from .annotator import AnnotateScope, IntermediateGlobalScope
 from .pull_scope import PullScopes
 from .utils import get_all_nodes, get_name
-from .graph import DiGraph
+
 
 class ScopeInfo:
     def __init__(self, tree, global_scope, error_scope, node_to_containing_scope):
@@ -26,7 +27,7 @@ class ScopeInfo:
             any other variables.
         """
         variables = self.global_scope.symbols_in_frame
-        g = DiGraph()
+        g = nx.DiGraph()
         g.add_nodes_from(variables)
         varis = self.global_scope.variables
         for construct in varis.functions | varis.classes:
